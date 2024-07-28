@@ -1,0 +1,40 @@
+package org.example;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TitanicDataLoader {
+    public List<Passenger> loadPassengers(String filePath) {
+        List<Passenger> passengers = new ArrayList<>();
+        String line;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            br.readLine(); // Skip header line
+            while ((line = br.readLine()) != null) {
+             String[] data = line.split(",");
+                Passenger passenger = new Passenger(
+                        Integer.parseInt(data[0]),
+                        Integer.parseInt(data[1]),
+                        Integer.parseInt(data[2]),
+                        data[3],
+                        data[4],
+                        data[5].isEmpty() ? -1 : Integer.parseInt(data[5]),
+                        Integer.parseInt(data[6]),
+                        Integer.parseInt(data[7]),
+                        data[8],
+                        Double.parseDouble(data[9]),
+                        data.length > 10 ? data[10] : "",
+                        data.length > 11 ? data[11] : ""
+                );
+                passengers.add(passenger);
+            }
+        } catch (IOException e) {
+           e.printStackTrace();
+        }
+
+        return passengers;
+    }
+}
