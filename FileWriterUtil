@@ -1,0 +1,19 @@
+package org.example;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
+public class FileWriterUtil {
+    public void writePassengersToFile(List<Passenger> passengers, String fileName) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
+            for (Passenger passenger : passengers) {
+                bw.write(passenger.toString());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
