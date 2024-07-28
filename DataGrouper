@@ -1,0 +1,17 @@
+package org.example;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class DataGrouper {
+    public Map<String, Long> groupByColumn(List<Passenger> passengers, String columnName) {
+        switch (columnName) {
+            case "embarked":
+                return passengers.stream()
+                                 .collect(Collectors.groupingBy(Passenger::getEmbarked, Collectors.counting()));
+              default:
+                throw new IllegalArgumentException("Invalid column name");
+        }
+    }
+}
