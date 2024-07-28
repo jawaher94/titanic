@@ -1,0 +1,15 @@
+package org.example;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
+public class StatisticsGenerator {
+    public void generateStatistics(List<Passenger> passengers, String fileName) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
