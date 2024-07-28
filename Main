@@ -1,0 +1,30 @@
+package org.example;
+
+import java.util.List;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        String filePath = "C:\\Users\\jawah\\Downloads\\titanic.csv";
+        String outputFilePath = "C:\\Users\\jawah\\Downloads\\titanic.csv";
+
+        TitanicDataLoader dataLoader = new TitanicDataLoader();
+        List<Passenger> passengers = dataLoader.loadPassengers(filePath);
+
+        PassengerFilter filter = new PassengerFilter();
+        List<Passenger> firstClassPassengers = filter.filterByClass(passengers, 1);
+
+        FileWriterUtil fileWriter = new FileWriterUtil();
+        fileWriter.writePassengersToFile(firstClassPassengers, outputFilePath);
+
+
+        DataGrouper dataGrouper = new DataGrouper();
+        Map<String, Long> groupedByEmbarked = dataGrouper.groupByColumn(passengers, "embarked");
+        System.out.println("Grouped by embarked:");
+        groupedByEmbarked.forEach((key, value) -> System.out.println(key + ": " + value));
+
+
+        StatisticsGenerator statsGenerator = new StatisticsGenerator();
+        statsGenerator.generateStatistics(passengers, "C:\\Users\\jawah\\Documents\\חוברת1.xlsx");
+    }
+}
